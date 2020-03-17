@@ -24,7 +24,7 @@ function smart_split(input, del, empty_space) {
             continue;
         }
 
-        outputs[outputs.length-1] += char;
+        outputs[outputs.length - 1] += char;
     }
 
     if (!empty_space) {
@@ -38,7 +38,7 @@ function smart_split(input, del, empty_space) {
     return outputs;
 }
 
-var terminal_user_title = "C: SWS/Kevin";
+var terminal_user_title = "C: Undefined/username";
 
 function update_user_title(title) {
     terminal_user_title = title;
@@ -50,10 +50,10 @@ update_user_title(terminal_user_title);
 var current_block;
 
 function new_block() {
-        var wrapper = document.getElementById('wrapper');
-        current_block = document.createElement("div");
-        current_block.classList.add("log");
-        wrapper.appendChild(current_block);
+    var wrapper = document.getElementById('wrapper');
+    current_block = document.createElement("div");
+    current_block.classList.add("log");
+    wrapper.appendChild(current_block);
 }
 
 function block_log(message) {
@@ -65,8 +65,8 @@ function log(message) {
     wrapper.innerHTML += "<div class='log'><p>" + message + "</p></div>";
 }
 
-document.getElementById('input_source').onblur = function(){
-  document.getElementById("input_source").focus();
+document.getElementById('input_source').onblur = function() {
+    document.getElementById("input_source").focus();
 };
 
 document.getElementById('input_source').addEventListener('keyup', submit_command);
@@ -93,29 +93,29 @@ function submit_command() {
     }
 }
 
-register_cmd("list", function (cmd) {
+register_cmd("list", function(cmd) {
     block_log("Registry Command List: ");
-   registry.forEach(function (value, key, map) {
-       block_log("    - " + key);
-   });
+    registry.forEach(function(value, key, map) {
+        block_log("    - " + key);
+    });
 });
 
-register_cmd("update", function(cmd){
-     var parameters = smart_split(cmd, " ", false).slice(1);
-     console.log(parameters);
-     if (parameters.length === 0) {
+register_cmd("update", function(cmd) {
+    var parameters = smart_split(cmd, " ", false).slice(1);
+    console.log(parameters);
+    if (parameters.length === 0) {
         block_log("Please Specify value that you would like to update!");
         return;
-     }
+    }
 
-     if (parameters[0].toString().toUpperCase() === "TITLE") {
-         if (parameters.length === 1) {
-             block_log("Please Specify title you would like to update the User Title!");
-             return;
-         }
-         update_user_title(parameters[1]);
-         block_log("Successfully Updated User Title!");
-         return;
-     }
+    if (parameters[0].toString().toUpperCase() === "TITLE") {
+        if (parameters.length === 1) {
+            block_log("Please Specify title you would like to update the User Title!");
+            return;
+        }
+        update_user_title(parameters[1]);
+        block_log("Successfully Updated User Title!");
+        return;
+    }
 
 });
